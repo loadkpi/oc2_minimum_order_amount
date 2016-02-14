@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Munimal order cost</name>
+    <code>minimal_order_cost</code>
+    <version>1.0</version>
+
+    <file path="catalog/controller/checkout/checkout.php">
+        <operation>
+            <search><![CDATA[
+            // Validate minimum quantity requirements.
+            ]]></search>
+            <add position="before"><![CDATA[
+        //start module minimal_order_cost
+        $this->load->model('setting/setting');
+        $minimal_order_cost = $this->model_setting_setting->getSetting('minimal_order_cost');
+        if ($this->cart->getSubtotal() < $minimal_order_cost['minimal_order_cost_value_cost_value']){
+            $this->session->data['error'] = str_replace('%s', $minimal_order_cost['minimal_order_cost_value_cost_value'], $minimal_order_cost['minimal_order_cost_value_error_msg']);
+            $this->response->redirect($this->url->link('checkout/cart'));
+        }
+        //end module minimal_order_cost
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="catalog/controller/checkout/cart.php">
+        <operation>
+            <search><![CDATA[
+            if ($this->cart->hasProducts() || !empty($this->session->data['vouchers'])) {
+            ]]></search>
+            <add position="after"><![CDATA[
+            ///start module minimal_order_cost
+            $this->load->model('setting/setting');
+            $minimal_order_cost = $this->model_setting_setting->getSetting('minimal_order_cost');
+            //end module minimal_order_cost
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+                unset($this->session->data['error']);
+            ]]></search>
+            <add position="after"><![CDATA[
+            //start module minimal_order_cost
+			} elseif ($this->cart->getSubtotal() < $minimal_order_cost['minimal_order_cost_value_cost_value']) {
+				$this->load->language('module/minimal_order_cost');
+				$data['error_warning'] = str_replace('%s', $minimal_order_cost['minimal_order_cost_value_cost_value'], $minimal_order_cost['minimal_order_cost_value_error_msg']);
+			//end module minimal_order_cost]]></add>
+        </operation>
+    </file>
+
+</modification>
