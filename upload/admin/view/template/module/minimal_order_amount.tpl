@@ -24,7 +24,7 @@
         <h3 class="panel-title"><i class="fa fa-pencil"></i> <?php echo $heading_label; ?></h3>
       </div>
       <div class="panel-body">
-        <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-minimal_order_cost" class="form-horizontal">
+        <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-minimal_order_amount" class="form-horizontal">
           <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $entry_currency; ?></label>
             <div class="col-sm-10">
@@ -32,18 +32,18 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label"><?php echo $entry_cost_value; ?></label>
+            <label class="col-sm-2 control-label"><?php echo $entry_amount_value; ?></label>
             <div class="col-sm-10">
-              <input type="text" value="<?php echo $value_cost_value; ?>" class="form-control" name="minimal_order_cost_value_cost_value" />
-              <?php if ($cost_value) { ?>
-                <div class="text-danger"><?php echo $cost_value; ?></div>
+              <input type="text" value="<?php echo $value_amount_value; ?>" class="form-control" name="minimal_order_amount_value_amount_value" />
+              <?php if ($amount_value) { ?>
+                <div class="text-danger"><?php echo $amount_value; ?></div>
               <?php } ?>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $entry_error_msg; ?></label>
             <div class="col-sm-10">
-              <textarea name="minimal_order_cost_value_error_msg" cols="40" rows="5" placeholder="<?php echo $placeholder_error_msg; ?>" class="form-control"><?php echo $value_error_msg; ?></textarea>
+              <textarea name="minimal_order_amount_value_error_msg" cols="40" rows="5" placeholder="<?php echo $placeholder_error_msg; ?>" class="form-control"><?php echo $value_error_msg; ?></textarea>
               <p><?php echo $tip_error_msg; ?></p>
               <?php if ($error_msg) { ?>
                 <div class="text-danger"><?php echo $error_msg; ?></div>
