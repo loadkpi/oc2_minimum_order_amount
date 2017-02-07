@@ -1,8 +1,10 @@
 # Simple Minimum Order Amount plugin for Opencart 2
 Tested with Opencart 2.3.0.2
 
+**User Notification:** 
 ![frontend](http://i.imgur.com/llMMieV.png)
 
+**Admin Interface:**
 ![backend](http://i.imgur.com/vPq5U7V.png)
 
 ### Installation
