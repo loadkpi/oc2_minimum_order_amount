@@ -1,5 +1,4 @@
-# Simple Minimum Order Amount plugin for Opencart 2
-Tested with Opencart 2.3.0.2
+# Simple Minimum Order Amount plugin for Opencart
 
 **User Notification:** 
 ![frontend](http://i.imgur.com/llMMieV.png)
@@ -9,7 +8,7 @@ Tested with Opencart 2.3.0.2
 
 ### Installation
 
- - Upload files from  **upload** dir
- - In Admin go to *Extension Installer* and upload **minimal_order_cost.ocmod.xml**. Don't forget to go to *Extension -> Modification* and refresh cache.
+ - Go to <a href="https://github.com/condor2/oc_minimum_order_amount/releases">Releases</a> and download the corresponding version with your opencart version
+ - In Admin go to *Extension Installer* and upload **minimal_order_cost_xxxx.ocmod.zip**. Don't forget to go to *Extension -> Modification* and refresh cache.
  - Go to *User -> User Groups* and check permissions for the module
  - Go to *Extensions*, install **Minimal Order Amount** module and change its settings.
