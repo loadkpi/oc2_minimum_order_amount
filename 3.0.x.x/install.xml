@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Munimal order amount</name>
+    <code>minimal_order_amount</code>
+    <version>0.3</version>
+
+    <file path="catalog/controller/checkout/checkout.php">
+        <operation>
+            <search><![CDATA[
+            // Validate minimum quantity requirements.
+            ]]></search>
+            <add position="before"><![CDATA[
+        //start module minimal_order_amount
+        $this->load->model('setting/setting');
+		
+        $minimal_order_amount = $this->model_setting_setting->getSetting('module_minimal_order_amount');
+        if (@$minimal_order_amount['module_minimal_order_amount_value_amount_value'] && $this->cart->getSubtotal() < $minimal_order_amount['module_minimal_order_amount_value_amount_value']){
+            $this->session->data['error'] = str_replace('%s', $minimal_order_amount['module_minimal_order_amount_value_amount_value'], $minimal_order_amount['module_minimal_order_amount_value_error_msg']);
+            $this->response->redirect($this->url->link('checkout/cart'));
+        }
+        //end module minimal_order_amount
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="catalog/controller/checkout/cart.php">
+        <operation>
+            <search><![CDATA[
+            if ($this->cart->hasProducts() || !empty($this->session->data['vouchers'])) {
+            ]]></search>
+            <add position="after"><![CDATA[
+            ///start module minimal_order_amount
+            $this->load->model('setting/setting');
+            $minimal_order_amount = $this->model_setting_setting->getSetting('module_minimal_order_amount');
+            //end module minimal_order_amount
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+                unset($this->session->data['error']);
+            ]]></search>
+            <add position="after"><![CDATA[
+            //start module minimal_order_amount
+			} elseif (@$minimal_order_amount['module_minimal_order_amount_value_amount_value'] && $this->cart->getSubtotal() < $minimal_order_amount['module_minimal_order_amount_value_amount_value']) {
+				$this->load->language('module/minimal_order_amount');
+				$data['error_warning'] = str_replace('%s', $minimal_order_amount['module_minimal_order_amount_value_amount_value'], $minimal_order_amount['module_minimal_order_amount_value_error_msg']);
+			//end module minimal_order_amount]]></add>
+        </operation>
+    </file>
+</modification>
